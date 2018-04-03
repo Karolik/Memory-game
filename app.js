@@ -1,3 +1,9 @@
+// Defining the variables
+const deck = document.querySelector('.deck');
+//const moves;
+//const stars;
+//const time;
+
 /*
  * Create a list that holds all of your cards
  */
@@ -25,7 +31,7 @@ function shuffle(array) {
     return array;
 }
 
-//Function to restart the game
+//function to restart the game
 
 function initialize(){
     shuffle(cards);
@@ -40,7 +46,6 @@ function initialize(){
     for(const card of cards) {
         cardGrid += '<li class="card"><i class="'+card+'"></i></li>'; 
     }
-    const deck = document.querySelector('.deck');
     deck.insertAdjacentHTML('afterbegin', cardGrid); 
 }
 window.onload = initialize();
@@ -49,11 +54,40 @@ window.onload = initialize();
 //const card = document.getElementsByClassName('card');
 
 function addClassShow(event) {
-    const card = document.getElementsByClassName('card');
-    for (let i = 0 ; i < card.length; i++) {
-   card[i].classList.add('show','open');
-}
+    event.target.classList.add('show','open');
+};
+//deck.addEventListener('click', addClassShow);
+
+function addClassMatch(event) {
+    event.target.classList.add('match');
 };
 
-const deck = document.querySelector('.deck');
-deck.addEventListener('click', addClassShow(event));
+function hideCards(event){
+    event.target.classList.remove('show','open');
+};
+
+//add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
+const openCardsList = [];
+function addToOpenCardsList(event){
+    if (event.target.classList.contains('show','open')){
+        openCardsList.push(event.target); //add an element to an array
+    }
+};
+
+//if the list already has another card, check to see if the two cards match
+function tracker(){
+    if (openCardsList.length < 2){     
+    deck.addEventListener('click', addClassShow);
+    deck.addEventListener('click', addToOpenCardsList);
+    }
+    else if(openCardsList.length == 2){
+        if(openCardsList[0]===openCardsList[1]){                  //if the cards do match, lock the cards in the open position
+            deck.addEventListener('click', addClassMatch);
+            openCardsList.splice(0,2);
+        }
+        else{
+            deck.addEventListener('click', hideCards);      //if the cards do not match,hide the card's symbol
+            openCardsList.splice(0,2);                  //remove the cards from the list 
+        }
+    }
+};
