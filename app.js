@@ -53,12 +53,12 @@ window.onload = initialize();
 /* event listener - a card is clicked -display the card's symbol (put this functionality in another function that you call from this one) */
 //const card = document.getElementsByClassName('card');
 
-function addClassShow(event) {
+function showCards(event) {
     event.target.classList.add('show','open');
 };
-//deck.addEventListener('click', addClassShow);
+//deck.addEventListener('click', showCards);
 
-function addClassMatch(event) {
+function matchCards(event) {
     event.target.classList.add('match');
 };
 
@@ -67,27 +67,33 @@ function hideCards(event){
 };
 
 //add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
-const openCardsList = [];
-function addToOpenCardsList(event){
+let openCards = [];
+/*function addToOpenCards(event){
     if (event.target.classList.contains('show','open')){
-        openCardsList.push(event.target); //add an element to an array
+        openCards.push(event.target); //add an element to an array
     }
-};
+}; */
 
 //if the list already has another card, check to see if the two cards match
-function tracker(){
-    if (openCardsList.length < 2){     
-    deck.addEventListener('click', addClassShow);
-    deck.addEventListener('click', addToOpenCardsList);
+function tracker(event){
+    if (openCards.length > 0) {
+        if(openCards.length === 1){
+            showCards(event);
+            openCards.push(event.target);
+        }
+        else if(openCards.length===2 && openCards.firstElementChild === openCards.lastElementChild){     //if the cards do match, lock the cards in the open position
+            matchCards(event);
+            openCards = [];                        //remove the cards from the list
+            //openCards.splice(0,2);
+        }
+        else if(openCards.length===2 && openCards.firstElementChild !== openCards.lastElementChild) {
+            hideCards(event);                           //if the cards do not match, hide the card's symbol
+            openCards = [];                  
+        }
     }
-    else if(openCardsList.length == 2){
-        if(openCardsList[0]===openCardsList[1]){                  //if the cards do match, lock the cards in the open position
-            deck.addEventListener('click', addClassMatch);
-            openCardsList.splice(0,2);
-        }
-        else{
-            deck.addEventListener('click', hideCards);      //if the cards do not match,hide the card's symbol
-            openCardsList.splice(0,2);                  //remove the cards from the list 
-        }
+    else if(openCards.length == 0) {
+        showCards(event);
+        openCards.push(event.target);
     }
 };
+deck.addEventListener('click', tracker);
