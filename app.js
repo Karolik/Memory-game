@@ -53,21 +53,27 @@ window.onload = initialize();
 /* event listener - a card is clicked -display the card's symbol (put this functionality in another function that you call from this one) */
 //const card = document.getElementsByClassName('card');
 
+
+
 function showCards(event) {
     event.target.classList.add('show','open');
 };
 //deck.addEventListener('click', showCards);
 
-function matchCards(event) {
-    event.target.classList.add('match');
+function matchCards() {
+    openCards.classList.add('match');
 };
 
-function hideCards(event){
-    event.target.classList.remove('show','open');
+function hideCards(){
+    openCards.classList.remove('show','open');
 };
 
 //add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
 let openCards = [];
+let matchedCards = [];
+//matchedCards.classList.contains('match');
+
+
 /*function addToOpenCards(event){
     if (event.target.classList.contains('show','open')){
         openCards.push(event.target); //add an element to an array
@@ -75,25 +81,26 @@ let openCards = [];
 }; */
 
 //if the list already has another card, check to see if the two cards match
-function tracker(event){
+function tracker(){
     if (openCards.length > 0) {
-        if(openCards.length === 1){
-            showCards(event);
-            openCards.push(event.target);
-        }
-        else if(openCards.length===2 && openCards.firstElementChild === openCards.lastElementChild){     //if the cards do match, lock the cards in the open position
-            matchCards(event);
+       if(openCards[0] === openCards[1]){     //if the cards do match, lock the cards in the open position
+       //if(openCards.firstElementChild === openCards.lastElementChild){   
+            matchCards;
             openCards = [];                        //remove the cards from the list
             //openCards.splice(0,2);
+            matchedCards.push(event.target);
         }
-        else if(openCards.length===2 && openCards.firstElementChild !== openCards.lastElementChild) {
-            hideCards(event);                           //if the cards do not match, hide the card's symbol
+        else {
+            hideCards;                           //if the cards do not match, hide the card's symbol
             openCards = [];                  
         }
+        console.log(matchedCards);
     }
-    else if(openCards.length == 0) {
+    else {
         showCards(event);
         openCards.push(event.target);
+        console.log(openCards);
     }
 };
 deck.addEventListener('click', tracker);
+
