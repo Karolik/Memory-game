@@ -1,13 +1,13 @@
 // Defining the variables
 const deck = document.querySelector('.deck');
-//const moves;
-//const stars;
-//const time;
+const moves = document.querySelector('.moves');
+const stars = document.querySelector('.stars');
+const time = document.querySelector('#time');
 
 /*
  * Create a list that holds all of your cards
  */
-const cards = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-bolt", "fa fa-bolt", "fa fa-cube", "fa fa-cube", "fa fa-leaf", "fa fa-leaf", "fa fa-bicycle", "fa fa-bicycle", "fa fa-bomb", "fa fa-bomb", "fa fa-anchor", "fa fa-anchor" ]
+const cards = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-bolt", "fa fa-bolt", "fa fa-cube", "fa fa-cube", "fa fa-leaf", "fa fa-leaf", "fa fa-bicycle", "fa fa-bicycle", "fa fa-bomb", "fa fa-bomb", "fa fa-anchor", "fa fa-anchor" ];
 
 /*
  * Display the cards on the page
@@ -50,57 +50,54 @@ function initialize(){
 }
 window.onload = initialize();
 
-/* event listener - a card is clicked -display the card's symbol (put this functionality in another function that you call from this one) */
+/* event listener - a card is clicked -display the card's symbol */
 //const card = document.getElementsByClassName('card');
-
-
-
-function showCards(event) {
-    event.target.classList.add('show','open');
-};
-//deck.addEventListener('click', showCards);
-
-function matchCards() {
-    openCards.classList.add('match');
-};
-
-function hideCards(){
-    openCards.classList.remove('show','open');
-};
 
 //add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
 let openCards = [];
-let matchedCards = [];
-//matchedCards.classList.contains('match');
+let matchedCards = [];              //matchedCards.classList.contains('match');
 
+function showCards(event) {
+    event.target.classList.add('show','open');
+}
+//deck.addEventListener('click', showCards);
 
-/*function addToOpenCards(event){
-    if (event.target.classList.contains('show','open')){
-        openCards.push(event.target); //add an element to an array
+function matchCards(openCards) {
+    for(let x=0;x < openCards; x++){
+        openCards.classList.add('match');
     }
-}; */
+}
+
+function hideCards(openCards) {
+    for(let x=0;x<openCards;x++){
+    openCards.classList.remove('show','open');
+    }
+}
 
 //if the list already has another card, check to see if the two cards match
-function tracker(){
+function tracker(event){
     if (openCards.length > 0) {
+        showCards(event);
+        openCards.push(event.target);
        if(openCards[0] === openCards[1]){     //if the cards do match, lock the cards in the open position
-       //if(openCards.firstElementChild === openCards.lastElementChild){   
-            matchCards;
+      // if(openCards[0].firstElementChild === openCards[1].firstElementChild){   
+            matchCards(cards[0],cards[1]);
             openCards = [];                        //remove the cards from the list
             //openCards.splice(0,2);
-            matchedCards.push(event.target);
+            matchedCards.push(openCards[0],openCards[1]);
         }
         else {
-            hideCards;                           //if the cards do not match, hide the card's symbol
-            openCards = [];                  
+            hideCards(openCards[0],openCards[1]);                          //if the cards do not match, hide the card's symbol
+            openCards = []; 
+            console.log(hideCards(openCards[0],openCards[1]));                 
         }
         console.log(matchedCards);
+        console.log(openCards);
     }
     else {
         showCards(event);
         openCards.push(event.target);
         console.log(openCards);
     }
-};
+}
 deck.addEventListener('click', tracker);
-
