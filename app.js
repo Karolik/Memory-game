@@ -81,13 +81,13 @@ function tracker(event){
         openCards.push(event.target);
        if(openCards[0] === openCards[1]){     //if the cards do match, lock the cards in the open position
       // if(openCards[0].firstElementChild === openCards[1].firstElementChild){   
-            matchCards(cards[0],cards[1]);
+            matchCards(openCards[0],openCards[1]);
             openCards = [];                        //remove the cards from the list
             //openCards.splice(0,2);
             matchedCards.push(openCards[0],openCards[1]);
         }
         else {
-            hideCards(openCards[0],openCards[1]);                          //if the cards do not match, hide the card's symbol
+            hideCards(openCards);                          //if the cards do not match, hide the card's symbol
             openCards = []; 
             console.log(hideCards(openCards[0],openCards[1]));                 
         }
