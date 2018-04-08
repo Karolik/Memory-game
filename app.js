@@ -86,8 +86,16 @@ function tracker(){
             matchedCards.push(openCards[0],openCards[1]);
        }       
         else {
-            hideCards(openCards[0]);
-            hideCards(openCards[1]);                       //if the cards do not match, hide the card's symbol
+            let hideCard1;
+            let hideCard2;
+            
+            function myFunction() {
+                hideCard1 = setTimeout(hideCards, 1000, openCards[0]);      //if the cards do not match, hide the card's symbol
+                hideCard2 = setTimeout(hideCards, 1000, openCards[1]);
+            }
+            myFunction();
+           // hideCards(openCards[0]);
+           // hideCards(openCards[1]);                       
             openCards = [];
             //console.log(hideCards(openCards[1])); 
            // console.log(hideCards(openCards[0]));                         
