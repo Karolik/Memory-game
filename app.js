@@ -89,11 +89,11 @@ function tracker(){
             let hideCard1;
             let hideCard2;
             
-            function myFunction() {
+            function postponeHide() {
                 hideCard1 = setTimeout(hideCards, 1000, openCards[0]);      //if the cards do not match, hide the card's symbol
                 hideCard2 = setTimeout(hideCards, 1000, openCards[1]);
             }
-            myFunction();
+            postponeHide();
            // hideCards(openCards[0]);
            // hideCards(openCards[1]);                       
             openCards = [];
