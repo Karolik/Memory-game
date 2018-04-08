@@ -50,53 +50,54 @@ function initialize(){
 }
 window.onload = initialize();
 
-/* event listener - a card is clicked -display the card's symbol */
+/* event listener - a card is clicked -display the card's symbol (put this functionality in another function that you call from this one) */
 //const card = document.getElementsByClassName('card');
-
-//add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
+//add the card to a *list* of "open" cards
 let openCards = [];
-let matchedCards = [];              //matchedCards.classList.contains('match');
+let matchedCards = [];              //matchedCards.classList.contains('match'); //instead of storing all the card details in an array, you could use a simple counter to count the number of matches. When it reaches 8 the game is done
+
 
 function showCards(event) {
     event.target.classList.add('show','open');
 }
 //deck.addEventListener('click', showCards);
 
-function matchCards(openCards) {
-    for(let x=0;x < openCards; x++){
-        openCards.classList.add('match');
-    }
+function matchCards(card) {
+    card.classList.add('match');
 }
 
-function hideCards(openCards) {
-    for(let x=0;x<openCards;x++){
-    openCards.classList.remove('show','open');
-    }
+function hideCards(card) {
+    card.classList.remove('show','open');
 }
+
 
 //if the list already has another card, check to see if the two cards match
-function tracker(event){
+function tracker(){
+    let clickedCard = event.target; 
     if (openCards.length > 0) {
         showCards(event);
-        openCards.push(event.target);
-       if(openCards[0] === openCards[1]){     //if the cards do match, lock the cards in the open position
+        openCards.push(clickedCard);
+        console.log(openCards);
+       if(openCards[0].innerHTML === openCards[1].innerHTML){     //if the cards do match, lock the cards in the open position
       // if(openCards[0].firstElementChild === openCards[1].firstElementChild){   
-            matchCards(openCards[0],openCards[1]);
-            openCards = [];                        //remove the cards from the list
-            //openCards.splice(0,2);
+            matchCards(openCards[0]);
+            matchCards(openCards[1]);
+            openCards = [];                        //remove the cards from the list (//openCards.splice(0,2);)
             matchedCards.push(openCards[0],openCards[1]);
-        }
+       }       
         else {
-            hideCards(openCards);                          //if the cards do not match, hide the card's symbol
-            openCards = []; 
-            console.log(hideCards(openCards[0],openCards[1]));                 
+            hideCards(openCards[0]);
+            hideCards(openCards[1]);                       //if the cards do not match, hide the card's symbol
+            openCards = [];
+            //console.log(hideCards(openCards[1])); 
+           // console.log(hideCards(openCards[0]));                         
         }
         console.log(matchedCards);
         console.log(openCards);
     }
     else {
         showCards(event);
-        openCards.push(event.target);
+        openCards.push(clickedCard);
         console.log(openCards);
     }
 }
