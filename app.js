@@ -52,8 +52,8 @@ window.onload = initialize();
 
 /* Opening, matching and hiding cards, when clicked*/
 
-let openCards = [];                 //A list of open cards
-let matchedCards = [];   //matchedCards.classList.contains('match'); // you could use a simple counter to count the number of matches.
+let openCards = [];                 //a list of open cards
+//let matchedCards = [];   //matchedCards.classList.contains('match'); //instead of storing all the card details in an array, you could use a simple counter to count the number of matches. When it reaches 8 the game is done
 
 
 function showCards(card) {
@@ -67,6 +67,7 @@ function matchCards(card) {
 function hideCards(card) {
     card.classList.remove('show','open');
 }
+let match = 0;
 
 function tracker(){
     let clickedCard = event.target; 
@@ -78,14 +79,23 @@ function tracker(){
             matchCards(openCards[0]);
             matchCards(openCards[1]);
             openCards = [];                        //Remove the cards from the openCards list (//openCards.splice(0,2);)
-            matchedCards.push(openCards[0],openCards[1]);
+           // matchedCards.push(openCards[0],openCards[1]);
             console.log(matchCards);
+            match++;
             setTimeout(function() {  
-                if (matchedCards.length == 16) {      // If all cards have matched, display a message with the final score 
-                    alert("Congratulations! You won!"+"\n"+"With x moves and x stars!"+"\n"+"Play again!");        
+                if (match === 8) {      // If all cards have matched, display a message with the final score 
+                alert("Congratulations! You won!"+"\n"+"With x moves and x stars!"+"\n"+"Play again!");     
+                location.reload();
+                }  
+            }, 600);                
+            /*
+            setTimeout(function() {  
+                if (matchedCards.length === 16) {      // If all cards have matched, display a message with the final score 
+                    alert("Congratulations! You won!"+"\n"+"With x moves and x stars!"+"\n"+"Play again!");     
                     location.reload();
                 }                             
-            }, 600);           
+            }, 600);    
+            */       
        }       
         else {                               //If the cards do not match, hide the card's symbol and remove the cards from the openCards list
             setTimeout(function() {          //Delay the execution of functions by 0,5 second, so the cards are visible for a moment
