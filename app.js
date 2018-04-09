@@ -82,12 +82,12 @@ function tracker(){
            // matchedCards.push(openCards[0],openCards[1]);
             console.log(matchCards);
             match++;
-            setTimeout(function() {  
+            //setTimeout(function() {  
                 if (match === 8) {      // If all cards have matched, display a message with the final score 
                 alert("Congratulations! You won!"+"\n"+"With x moves and x stars!"+"\n"+"Play again!");     
                 location.reload();
                 }  
-            }, 600);                
+           // }, 600);                
             /*
             setTimeout(function() {  
                 if (matchedCards.length === 16) {      // If all cards have matched, display a message with the final score 
