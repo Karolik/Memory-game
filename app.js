@@ -52,8 +52,8 @@ window.onload = initialize();
 
 /* Opening, matching and hiding cards, when clicked*/
 
-let openCards = [];                 //a list of open cards
-let matchedCards = [];   //matchedCards.classList.contains('match'); //instead of storing all the card details in an array, you could use a simple counter to count the number of matches. When it reaches 8 the game is done
+let openCards = [];                 //A list of open cards
+let matchedCards = [];   //matchedCards.classList.contains('match'); // you could use a simple counter to count the number of matches.
 
 
 function showCards(card) {
@@ -82,7 +82,7 @@ function tracker(){
             console.log(matchCards);
             setTimeout(function() {  
                 if (matchedCards.length == 16) {      // If all cards have matched, display a message with the final score 
-                    alert("Congratulations! You won!/nWith x moves and x stars!/nPlay again!");       
+                    alert("Congratulations! You won!"+"\n"+"With x moves and x stars!"+"\n"+"Play again!");        
                     location.reload();
                 }                             
             }, 600);           
