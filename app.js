@@ -104,7 +104,7 @@ function tracker(){
                 openCards = [];          
             }, 500);                       
         }
-        console.log(matchedCards);
+       // console.log(matchedCards);
     }
     else {
         showCards(clickedCard);
