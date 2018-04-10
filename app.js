@@ -1,8 +1,8 @@
 // Defining the variables
 const deck = document.querySelector('.deck');
-const moves = document.querySelector('.moves');
+const moveCounter = document.querySelector('.moveCounter');
 const stars = document.querySelector('.stars');
-const time = document.querySelector('#time');
+const time = document.querySelector('.time');
 
 /*
  * Create a list that holds all of your cards
@@ -53,8 +53,6 @@ window.onload = initialize();
 /* Opening, matching and hiding cards, when clicked*/
 
 let openCards = [];                 //a list of open cards
-//let matchedCards = [];   //matchedCards.classList.contains('match'); //instead of storing all the card details in an array, you could use a simple counter to count the number of matches. When it reaches 8 the game is done
-
 
 function showCards(card) {
     card.classList.add('show','open');
@@ -79,23 +77,13 @@ function tracker(){
             matchCards(openCards[0]);
             matchCards(openCards[1]);
             openCards = [];                        //Remove the cards from the openCards list (//openCards.splice(0,2);)
-           // matchedCards.push(openCards[0],openCards[1]);
             console.log(matchCards);
             match++;
-            //setTimeout(function() {  
-                if (match === 8) {      // If all cards have matched, display a message with the final score 
-                alert("Congratulations! You won!"+"\n"+"With x moves and x stars!"+"\n"+"Play again!");     
-                location.reload();
-                }  
-           // }, 600);                
-            /*
             setTimeout(function() {  
-                if (matchedCards.length === 16) {      // If all cards have matched, display a message with the final score 
-                    alert("Congratulations! You won!"+"\n"+"With x moves and x stars!"+"\n"+"Play again!");     
-                    location.reload();
-                }                             
-            }, 600);    
-            */       
+                if (match === 8) {      // If all cards have matched, display a message with the final score 
+                endGame();    
+                }  
+           }, 600);                    
        }       
         else {                               //If the cards do not match, hide the card's symbol and remove the cards from the openCards list
             setTimeout(function() {          //Delay the execution of functions by 0,5 second, so the cards are visible for a moment
@@ -104,18 +92,54 @@ function tracker(){
                 openCards = [];          
             }, 500);                       
         }
-       // console.log(matchedCards);
     }
     else {
         showCards(clickedCard);
         openCards.push(clickedCard);
     }
 }
+// Increment the move counter and display it on the page
+let moves = 0;
+function countMoves(){
+    moves++;
+    moveCounter.innerHTML = moves;
+}
 
 /* Event listener - a card is clicked -display the card's symbol*/
 deck.addEventListener('click', function(event){
     if (event.target.nodeName === 'LI'){
         tracker(event);
-        console.log('true');
+        countMoves();
     }
 });
+
+//Function to end the game
+function endGame(){
+    alert("Congratulations! You won!"+"\n"+"With "+ moveCounter.innerText +"moves and x stars!"+"\n"+"Your time is "+time.innerText+"\n"+"Play again!");     
+    location.reload();
+    clearInterval(timer);
+}
+
+//Set a timer
+const hour = document.querySelector('.hour');
+const minute = document.querySelector(".minute");
+const second = document.querySelector(".second");
+let seconds = 0;
+let timer = setInterval(countTime, 1000);
+
+function countTime() {
+  seconds++;
+  second.innerHTML = pad(seconds % 60);
+  minute.innerHTML = pad(parseInt(seconds / 60));
+  hour.innerHTML = pad(parseInt(seconds / 3600));
+}
+function pad(val) {
+  let valString = val + "";
+  if (valString.length < 2) {
+    return "0" + valString;
+  } else {
+    return valString;
+  }
+}
+
+//remove stars after a number of moves
