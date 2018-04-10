@@ -105,23 +105,74 @@ function countMoves(){
     moveCounter.innerHTML = moves;
 }
 
-/* Event listener - a card is clicked -display the card's symbol*/
+//remove stars after a number of moves
+/* when moves = 10 and match < 1 - 2 stars
+moves = 30 && match < 2 - 1 star
+moves = 40 
+
+*/
+let star = document.getElementsByClassName("fa fa-star");
+console.log(star);
+
+/*
+$("p:eq(1)")
+*/
+
+let star3 = document.getElementsByClassName("fa fa-star")[2];
+let star2 = document.getElementsByClassName("fa fa-star")[1];
+let star1 = document.getElementsByClassName("fa fa-star")[0];
+
+function removeStars(){
+    if (moves == 22){
+        star3.classList.remove("fa-star");
+        star3.classList.add("fa-star-o");
+    }
+    else if (moves == 30){
+        star2.classList.remove("fa-star");
+        star2.classList.add("fa-star-o");
+    }
+    else if (moves == 40){
+        star1.classList.remove("fa-star");
+        star1.classList.add("fa-star-o");
+    }
+}
+let starsNumber ="";
+function countStars(){
+    if (moves< 22){
+        starsNumber = 3;
+    }
+    else if (moves >= 22 && moves < 30){
+        starsNumber = 2;
+    }
+    else if (moves >= 30 && moves < 40){
+        starsNumber = 1;
+    }
+    else if (moves >= 40){
+        starsNumber = 0;
+    }
+}
+
+
+
+// Event listener - a card is clicked -display the card's symbol
 deck.addEventListener('click', function(event){
     if (event.target.nodeName === 'LI'){
         tracker(event);
         countMoves();
+        removeStars();
+        countStars();
     }
 });
 
 //Function to end the game
 function endGame(){
-    alert("Congratulations! You won!"+"\n"+"With "+ moveCounter.innerText +"moves and x stars!"+"\n"+"Your time is "+time.innerText+"\n"+"Play again!");     
+    alert("Congratulations! You won!"+"\n"+"With "+ moveCounter.innerText +" moves and "+ starsNumber +" stars!"+"\n"+"Your time is "+time.innerText+"\n"+"Play again!");     
     location.reload();
     clearInterval(timer);
 }
 
 //Set a timer
-const hour = document.querySelector('.hour');
+const hour = document.querySelector(".hour");
 const minute = document.querySelector(".minute");
 const second = document.querySelector(".second");
 let seconds = 0;
@@ -131,15 +182,14 @@ function countTime() {
   seconds++;
   second.innerHTML = pad(seconds % 60);
   minute.innerHTML = pad(parseInt(seconds / 60));
-  hour.innerHTML = pad(parseInt(seconds / 3600));
+  hour.innerHTML = pad(parseInt(seconds / 3600));      
 }
-function pad(val) {
-  let valString = val + "";
-  if (valString.length < 2) {
-    return "0" + valString;
-  } else {
-    return valString;
+function pad(num) {             //Double digit timer
+  let numString = num + "";
+  if (numString.length < 2) {
+        return "0" + numString;
+  } 
+  else {
+        return numString;
   }
 }
-
-//remove stars after a number of moves
