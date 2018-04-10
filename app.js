@@ -105,18 +105,7 @@ function countMoves(){
     moveCounter.innerHTML = moves;
 }
 
-//remove stars after a number of moves
-/* when moves = 10 and match < 1 - 2 stars
-moves = 30 && match < 2 - 1 star
-moves = 40 
-
-*/
-let star = document.getElementsByClassName("fa fa-star");
-console.log(star);
-
-/*
-$("p:eq(1)")
-*/
+//Remove stars after a number of moves
 
 let star3 = document.getElementsByClassName("fa fa-star")[2];
 let star2 = document.getElementsByClassName("fa fa-star")[1];
@@ -136,6 +125,7 @@ function removeStars(){
         star1.classList.add("fa-star-o");
     }
 }
+
 let starsNumber ="";
 function countStars(){
     if (moves< 22){
@@ -182,7 +172,7 @@ function countTime() {
   seconds++;
   second.innerHTML = pad(seconds % 60);
   minute.innerHTML = pad(parseInt(seconds / 60));
-  hour.innerHTML = pad(parseInt(seconds / 3600));      
+  hour.innerHTML = pad(parseInt(seconds / 3600));   
 }
 function pad(num) {             //Double digit timer
   let numString = num + "";
