@@ -96,6 +96,7 @@ function tracker(){
     else {
         showCards(clickedCard);
         openCards.push(clickedCard);
+        let timer = setInterval(countTime, 1000);       //Start the timer when a player clicks the first card
     }
 }
 // Increment the move counter and display it on the page
@@ -164,7 +165,6 @@ const hour = document.querySelector(".hour");
 const minute = document.querySelector(".minute");
 const second = document.querySelector(".second");
 let seconds = 0;
-let timer = setInterval(countTime, 1000);
 
 function countTime() {
   seconds++;
