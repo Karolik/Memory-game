@@ -105,7 +105,7 @@ function countMoves(){
     moveCounter.innerHTML = moves;
 }
 
-//Remove stars after a number of moves
+//Star rating - Remove stars after a number of moves
 
 let star3 = document.getElementsByClassName("fa fa-star")[2];
 let star2 = document.getElementsByClassName("fa fa-star")[1];
@@ -142,8 +142,6 @@ function countStars(){
     }
 }
 
-
-
 // Event listener - a card is clicked -display the card's symbol
 deck.addEventListener('click', function(event){
     if (event.target.nodeName === 'LI'){
@@ -172,7 +170,7 @@ function countTime() {
   seconds++;
   second.innerHTML = pad(seconds % 60);
   minute.innerHTML = pad(parseInt(seconds / 60));
-  hour.innerHTML = pad(parseInt(seconds / 3600));   
+  hour.innerHTML = pad(parseInt(seconds / 3600));       // problem with measuring hours - there were 220 minutes and 3 hours - fix it
 }
 function pad(num) {             //Double digit timer
   let numString = num + "";
