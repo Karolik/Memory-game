@@ -1,4 +1,4 @@
-// Defining the variables
+/// Defining the variables
 const deck = document.querySelector('.deck');
 const moveCounter = document.querySelector('.moveCounter');
 const stars = document.querySelector('.stars');
@@ -96,7 +96,6 @@ function tracker(){
     else {
         showCards(clickedCard);
         openCards.push(clickedCard);
-        let timer = setInterval(countTime, 1000);       //Start the timer when a player clicks the first card
     }
 }
 // Increment the move counter and display it on the page
@@ -146,10 +145,13 @@ function countStars(){
 // Event listener - a card is clicked -display the card's symbol
 deck.addEventListener('click', function(event){
     if (event.target.nodeName === 'LI'){
-        tracker(event);
+        tracker(event);             // avoid double click on the same card
         countMoves();
         removeStars();
         countStars();
+    }
+    if (moveCounter.innerText == '1'){          //Start the timer when a player clicks the first card
+        setInterval(countTime, 1000);
     }
 });
 
@@ -165,6 +167,7 @@ const hour = document.querySelector(".hour");
 const minute = document.querySelector(".minute");
 const second = document.querySelector(".second");
 let seconds = 0;
+//let timer = setInterval(countTime, 1000);
 
 function countTime() {
   seconds++;
