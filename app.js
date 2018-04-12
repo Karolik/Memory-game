@@ -1,8 +1,10 @@
-/// Defining the variables
+// Defining the variables
 const deck = document.querySelector('.deck');
 const moveCounter = document.querySelector('.moveCounter');
 const stars = document.querySelector('.stars');
 const time = document.querySelector('.time');
+//const popup = document.querySelector('.popup');
+const restart = document.querySelector('.restart');
 
 /*
  * Create a list that holds all of your cards
@@ -31,15 +33,10 @@ function shuffle(array) {
     return array;
 }
 
-//Function to restart the game
+//Function to start the game
 
-function initialize(){
+function initialize(){ 
     shuffle(cards);
-
-    const restart = document.querySelector('.restart');
-    restart.click(function initialize(){
-        return this;
-      });
 
     //Loop through each card and create its HTML;  - Add each card's HTML to the page (Store the HTML in a string)
     let cardGrid = "";
@@ -50,9 +47,16 @@ function initialize(){
 }
 window.onload = initialize();
 
-/* Opening, matching and hiding cards, when clicked*/
+// The restart button
 
-let openCards = [];                 //a list of open cards
+restart.addEventListener('click', function(){   
+    document.location.href="";
+    }
+)
+
+// Opening, matching and hiding cards, when clicked
+
+let openCards = [];                 //A list of open cards
 
 function showCards(card) {
     card.classList.add('show','open');
@@ -102,7 +106,7 @@ function tracker(){
 let moves = 0;
 function countMoves(){
     moves++;
-    moveCounter.innerHTML = moves;
+    moveCounter.innerHTML = moves;  //moves/2 liczby calkowite od 0,6
 }
 
 //Star rating - Remove stars after a number of moves
@@ -142,6 +146,8 @@ function countStars(){
     }
 }
 
+let timer;
+
 // Event listener - a card is clicked -display the card's symbol
 deck.addEventListener('click', function(event){
     if (event.target.nodeName === 'LI'){
@@ -151,15 +157,23 @@ deck.addEventListener('click', function(event){
         countStars();
     }
     if (moveCounter.innerText == '1'){          //Start the timer when a player clicks the first card
-        setInterval(countTime, 1000);
+        let timer = setInterval(countTime, 1000);
     }
 });
 
 //Function to end the game
-function endGame(){
-    alert("Congratulations! You won!"+"\n"+"With "+ moveCounter.innerText +" moves and "+ starsNumber +" stars!"+"\n"+"Your time is "+time.innerText+"\n"+"Play again!");     
-    location.reload();
-    clearInterval(timer);
+function endGame(){   
+    //location.reload();
+    clearInterval(timer);       //  !!it doesn't work!!
+    swal({                         //Popup message at the end of the game
+        title: "Congratulations!",
+        text: "You won!"+"\n"+"With "+ moveCounter.innerText +" moves and "+ starsNumber +" stars!"+"\n"+"Your time is "+time.innerText+"!",
+        icon: "success",
+        button: "Play again!",
+        
+    }).then((result) => {
+         document.location.href="";
+    })
 }
 
 //Set a timer
