@@ -164,17 +164,18 @@ deck.addEventListener('click', function(event){
 //Set a timer
 
 const hour = document.querySelector(".hour");
-const minute = document.querySelector(".minute");
+const minute = document.querySelector(".minute");   
 const second = document.querySelector(".second");
 let seconds = 0;
 
 function countTime() {
   seconds++;
-  second.innerHTML = pad(seconds % 60);
-  minute.innerHTML = pad(parseInt(seconds / 60));
-  hour.innerHTML = pad(parseInt(seconds / 3600));       // problem with measuring hours - there were 220 minutes and 3 hours - fix it
+  let h = hour.innerHTML = dd(parseInt(seconds / 3600)); 
+  minute.innerHTML = dd(parseInt((seconds - h*3600) / 60));   // When counter reaches 3600 sec, the number is visible as hours (1 hour), not as minutes (60)//Math.floor((seconds - hour*3600)/60);
+  second.innerHTML = dd(seconds % 60);
 }
-function pad(num) {             //Double digit timer
+
+function dd(num) {             //Double digit timer 00:00:00 (not 0:0:0)
   let numString = num + "";
   if (numString.length < 2) {
         return "0" + numString;
@@ -198,4 +199,3 @@ function endGame(){
     })
     clearInterval(timer);                    //Stop the timer
 }
-
