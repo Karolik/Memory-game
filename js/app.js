@@ -1,21 +1,19 @@
 // Defining the variables
+
 const deck = document.querySelector('.deck');
 const moveCounter = document.querySelector('.moveCounter');
 const stars = document.querySelector('.stars');
 const time = document.querySelector('.time');
-//const popup = document.querySelector('.popup');
 const restart = document.querySelector('.restart');
 
-/*
- * Create a list that holds all of your cards
- */
+// Create a list that holds all of your cards
+
 const cards = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-bolt", "fa fa-bolt", "fa fa-cube", "fa fa-cube", "fa fa-leaf", "fa fa-leaf", "fa fa-bicycle", "fa fa-bicycle", "fa fa-bomb", "fa fa-bomb", "fa fa-anchor", "fa fa-anchor" ];
+
 
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
  */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -33,18 +31,19 @@ function shuffle(array) {
     return array;
 }
 
-//Function to start the game
+//Function to start the game: display cards and shuffle them
 
 function initialize(){ 
     shuffle(cards);
 
-    //Loop through each card and create its HTML;  - Add each card's HTML to the page (Store the HTML in a string)
+    //Loop through each card and create its HTML; Add each card's HTML to the page (Store the HTML in a string)
     let cardGrid = "";
     for(const card of cards) {
         cardGrid += '<li class="card"><i class="'+card+'"></i></li>'; 
     }
     deck.insertAdjacentHTML('afterbegin', cardGrid); 
 }
+
 window.onload = initialize();
 
 // The restart button
@@ -69,6 +68,7 @@ function matchCards(card) {
 function hideCards(card) {
     card.classList.remove('show','open');
 }
+
 let match = 0;
 
 function tracker(){
@@ -80,7 +80,7 @@ function tracker(){
        if(openCards[0].innerHTML === openCards[1].innerHTML){     //If the cards do match, lock the cards in the open position  
             matchCards(openCards[0]);
             matchCards(openCards[1]);
-            openCards = [];                        //Remove the cards from the openCards list (//openCards.splice(0,2);)
+            openCards = [];              //Remove the cards from the openCards list
             console.log(matchCards);
             match++;
             setTimeout(function() {  
@@ -102,11 +102,13 @@ function tracker(){
         openCards.push(clickedCard);
     }
 }
+
 // Increment the move counter and display it on the page
+
 let moves = 0;
 function countMoves(){
     moves++;
-    moveCounter.innerHTML = moves;  //moves/2 liczby calkowite od 0,6
+    moveCounter.innerHTML = parseInt(moves/2);  //moves/2 liczby calkowite od 0,6
 }
 
 //Star rating - Remove stars after a number of moves
@@ -116,15 +118,15 @@ let star2 = document.getElementsByClassName("fa fa-star")[1];
 let star1 = document.getElementsByClassName("fa fa-star")[0];
 
 function removeStars(){
-    if (moves == 22){
+    if (moves == 11){
         star3.classList.remove("fa-star");
         star3.classList.add("fa-star-o");
     }
-    else if (moves == 30){
+    else if (moves == 15){
         star2.classList.remove("fa-star");
         star2.classList.add("fa-star-o");
     }
-    else if (moves == 40){
+    else if (moves == 20){
         star1.classList.remove("fa-star");
         star1.classList.add("fa-star-o");
     }
@@ -132,16 +134,16 @@ function removeStars(){
 
 let starsNumber ="";
 function countStars(){
-    if (moves< 22){
+    if (moves< 11){
         starsNumber = 3;
     }
-    else if (moves >= 22 && moves < 30){
+    else if (moves >= 11 && moves < 15){
         starsNumber = 2;
     }
-    else if (moves >= 30 && moves < 40){
+    else if (moves >= 15 && moves < 20){
         starsNumber = 1;
     }
-    else if (moves >= 40){
+    else if (moves >= 20){
         starsNumber = 0;
     }
 }
@@ -157,23 +159,24 @@ deck.addEventListener('click', function(event){
         countStars();
     }
     if (moveCounter.innerText == '1'){          //Start the timer when a player clicks the first card
-        let timer = setInterval(countTime, 1000);
+        timer = setInterval(countTime, 1000);
     }
 });
 
 //Function to end the game
 function endGame(){   
     //location.reload();
-    clearInterval(timer);       //  !!it doesn't work!!
+    //let timer = setInterval(countTime, 1000);      
     swal({                         //Popup message at the end of the game
-        title: "Congratulations!",
-        text: "You won!"+"\n"+"With "+ moveCounter.innerText +" moves and "+ starsNumber +" stars!"+"\n"+"Your time is "+time.innerText+"!",
+        title: "Congratulations! You won!",
+        text: "With "+ moveCounter.innerText +" moves and "+ starsNumber +" stars!"+"\n"+"Your time is "+time.innerText+"!",
         icon: "success",
         button: "Play again!",
         
     }).then((result) => {
          document.location.href="";
     })
+    clearInterval(timer);       //  !!it doesn't work!!
 }
 
 //Set a timer
@@ -181,7 +184,6 @@ const hour = document.querySelector(".hour");
 const minute = document.querySelector(".minute");
 const second = document.querySelector(".second");
 let seconds = 0;
-//let timer = setInterval(countTime, 1000);
 
 function countTime() {
   seconds++;
