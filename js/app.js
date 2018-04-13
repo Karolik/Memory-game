@@ -10,12 +10,6 @@ const restart = document.querySelector('.restart');
 
 const cards = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-bolt", "fa fa-bolt", "fa fa-cube", "fa fa-cube", "fa fa-leaf", "fa fa-leaf", "fa fa-bicycle", "fa fa-bicycle", "fa fa-bomb", "fa fa-bomb", "fa fa-anchor", "fa fa-anchor" ];
 
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- */
-
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -31,7 +25,7 @@ function shuffle(array) {
     return array;
 }
 
-//Function to start the game: display cards and shuffle them
+//Function to start the game: display the cards on the page and shuffle them using the provided "shuffle" method above
 
 function initialize(){ 
     shuffle(cards);
@@ -108,7 +102,7 @@ function tracker(){
 let moves = 0;
 function countMoves(){
     moves++;
-    moveCounter.innerHTML = parseInt(moves/2);  //moves/2 liczby calkowite od 0,6
+    moveCounter.innerHTML = parseInt(moves/2);  
 }
 
 //Star rating - Remove stars after a number of moves
@@ -148,38 +142,24 @@ function countStars(){
     }
 }
 
+// Event listener - a card is clicked -display the card's symbol
+
 let timer;
 
-// Event listener - a card is clicked -display the card's symbol
 deck.addEventListener('click', function(event){
     if (event.target.nodeName === 'LI'){
-        tracker(event);             // avoid double click on the same card
+        tracker(event);                         // avoid double click on the same card
         countMoves();
         removeStars();
         countStars();
     }
-    if (moveCounter.innerText == '1'){          //Start the timer when a player clicks the first card
+    if (moves == 1){                            //Start the timer when a player clicks the first card
         timer = setInterval(countTime, 1000);
     }
 });
 
-//Function to end the game
-function endGame(){   
-    //location.reload();
-    //let timer = setInterval(countTime, 1000);      
-    swal({                         //Popup message at the end of the game
-        title: "Congratulations! You won!",
-        text: "With "+ moveCounter.innerText +" moves and "+ starsNumber +" stars!"+"\n"+"Your time is "+time.innerText+"!",
-        icon: "success",
-        button: "Play again!",
-        
-    }).then((result) => {
-         document.location.href="";
-    })
-    clearInterval(timer);       //  !!it doesn't work!!
-}
-
 //Set a timer
+
 const hour = document.querySelector(".hour");
 const minute = document.querySelector(".minute");
 const second = document.querySelector(".second");
@@ -200,3 +180,19 @@ function pad(num) {             //Double digit timer
         return numString;
   }
 }
+
+//Function to end the game
+
+function endGame(){       
+    swal({                                   //Popup message at the end of the game
+        title: "Congratulations! You won!",
+        text: "With "+ moveCounter.innerText +" moves and "+ starsNumber +" stars!"+"\n"+"Your time is "+time.innerText+"!",
+        icon: "success",
+        button: "Play again!",
+        
+    }).then((result) => {
+         document.location.href="";
+    })
+    clearInterval(timer);                    //Stop the timer
+}
+
