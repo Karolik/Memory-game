@@ -102,7 +102,7 @@ function tracker(){
 let moves = 0;
 function countMoves(){
     moves++;
-    moveCounter.innerHTML = parseInt(moves/2);  
+    moveCounter.innerHTML = parseInt(moves/2);          //Moves are counted each time a pair of cards gets open/matched(every second click)
 }
 
 //Star rating - Remove stars after a number of moves
@@ -112,15 +112,15 @@ let star2 = document.getElementsByClassName("fa fa-star")[1];
 let star1 = document.getElementsByClassName("fa fa-star")[0];
 
 function removeStars(){
-    if (moves == 11){
+    if (moves == 22){
         star3.classList.remove("fa-star");
         star3.classList.add("fa-star-o");
     }
-    else if (moves == 15){
+    else if (moves == 30){
         star2.classList.remove("fa-star");
         star2.classList.add("fa-star-o");
     }
-    else if (moves == 20){
+    else if (moves == 40){
         star1.classList.remove("fa-star");
         star1.classList.add("fa-star-o");
     }
@@ -128,16 +128,16 @@ function removeStars(){
 
 let starsNumber ="";
 function countStars(){
-    if (moves< 11){
+    if (moves< 22){
         starsNumber = 3;
     }
-    else if (moves >= 11 && moves < 15){
+    else if (moves >= 22 && moves < 30){
         starsNumber = 2;
     }
-    else if (moves >= 15 && moves < 20){
+    else if (moves >= 30 && moves < 40){
         starsNumber = 1;
     }
-    else if (moves >= 20){
+    else if (moves >= 40){
         starsNumber = 0;
     }
 }
