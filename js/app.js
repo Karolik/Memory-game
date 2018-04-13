@@ -65,6 +65,8 @@ function hideCards(card) {
 
 let match = 0;
 
+// Function to open, match and hide cards; is called when a card is clicked
+
 function tracker(){
     let clickedCard = event.target; 
     if (openCards.length > 0) {         //If the list already has another card, check to see if the two cards match
@@ -76,9 +78,9 @@ function tracker(){
             matchCards(openCards[1]);
             openCards = [];              //Remove the cards from the openCards list
             console.log(matchCards);
-            match++;
+            match++;                     // Add the match to the number of matches
             setTimeout(function() {  
-                if (match === 8) {      // If all cards have matched, display a message with the final score 
+                if (match === 8) {      // If all cards have matched, call the endGame function to finish the game
                 endGame();    
                 }  
            }, 600);                    
@@ -148,10 +150,11 @@ let timer;
 
 deck.addEventListener('click', function(event){
     if (event.target.nodeName === 'LI'){
-        tracker(event);                         // avoid double click on the same card
+        tracker(event);                         
         countMoves();
         removeStars();
         countStars();
+        event.target.ondblclick = function(){event.preventDefault();};      // avoid double click on the same card
     }
     if (moves == 1){                            //Start the timer when a player clicks the first card
         timer = setInterval(countTime, 1000);
@@ -190,8 +193,8 @@ function endGame(){
         icon: "success",
         button: "Play again!",
         
-    }).then((result) => {
-         document.location.href="";
+    }).then((result) => {                   
+         document.location.href="";          //When the button is clicked to Play again, the game is restarted
     })
     clearInterval(timer);                    //Stop the timer
 }
