@@ -1,87 +1,50 @@
 # Memory-game
 
-There are 8 pairs of cards in the deck. Players click the cards to open them and to match them as fast as possible and using the least moves.
+The game is all about concentration and memory training. Players click cards to open them and to match pairs with the same symbol as fast as possible and using the least moves.
 
-## Getting Started
+## How it works
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+There are 8 pairs of cards in the deck. Cards are randomly shuffled each time the browser window opens or when a player clicks the restart button. Initially cards are arranged with the symbol face down. Players click a card to flip it and see the sign. Up to two cards are visible at the same time. Players must memorise the position of the cards in order to match both cards with the same symbol.
+
+Each turn:
+•	The player flips one card over to reveal its underlying symbol.
+•	The player then turns over a second card, trying to find the corresponding card with the same symbol.
+•	If the cards match, both cards stay flipped over.
+•	If the cards do not match, both cards are flipped face down.
+The game ends once all cards have been correctly matched.
+
+Additional features of the game:
+-	A timer – starts measuring time starting from the first click on a card, ends measuring time when game is over, all cards are matched.
+-	Moves counter – moves are counted each time the player flips two cards.
+-	Stars – initially there are 3 stars, after 11 moves there are only 2 stars left, after 15 moves there is only 1 star left and after 20 moves the player gets 0 stars.
+
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+You need to have access to the Internet and a browser installed (preferably Google Chrome) to run this game.
 
-```
-Give examples
-```
 
-### Installing
+## Languages used to build the game
 
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+•	HTML
+•	CSS
+•	JavaScript
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+Please read [CONTRIBUTING.md]
+This is the project of Udacity/Google Nanodegree FEWD.
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **Karolina Gauvain**  - [Memory-game] (https://github.com/Karolik/Memory-game/)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the General License 
 
 ## Acknowledgments
 
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
+* My mentor, Neil, for the guidance, support and motivation
+* https://www.w3schools.com/
+* https://developer.mozilla.org/
