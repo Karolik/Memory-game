@@ -2,7 +2,17 @@
 
 The game is all about concentration and memory training. Players click cards to open them and to match pairs with the same symbol as fast as possible and using the least moves.
 
-## How it works
+## Table of Contents
+
+* [Instructions](#instructions)
+* [Prerequisites](#prerequisites)
+* [Languages used to build the game](#languages used to build the game)
+* [Contributing](#contributing)
+* [Authors](#authors)
+* [License](#license)
+* [Acknowledgments](#acknowledgments)
+
+## Instructions
 
 There are 8 pairs of cards in the deck. Cards are randomly shuffled each time the browser window opens or when a player clicks the restart button. Initially cards are arranged with the symbol face down. Players click a card to flip it and see the sign. Up to two cards are visible at the same time. Players must memorise the position of the cards in order to match both cards with the same symbol.
 
