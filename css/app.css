@@ -65,15 +65,12 @@ h1 {
     align-items: center;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
     transition: background-color 1s ease;
-    transition: 1s ease;
+    /*transform:rotateY(180deg);*/
 }
 
 .deck .card.open {
-    transform: rotateY(90);
-    /*background: #81ADB9;*/
-    background: #c39a33;
+    background: linear-gradient(#d39f0c, #dac715);
     cursor: default;
-    transition: transform 1s ease;
 }
 
 .deck .card.show {
@@ -82,10 +79,15 @@ h1 {
 
 .deck .card.match {
     cursor: default;
-    /*background: #02ccba;*/
-    background: #21932e;
+    background: linear-gradient(#86e664, #0c8747);
     font-size: 33px;
-    transition: background-color 1s ease;
+    transition: transform 1s ease;
+}
+
+.deck .card.hide {
+    background:linear-gradient( #bd333b,#e58083);
+    cursor: default;
+    font-size: 33px;
 }
 
 /*
@@ -114,3 +116,71 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+/*
+ * Media queries for responsive look
+ */
+
+@media screen and (max-width: 400px) {
+    .deck {
+        width: 90%;             /*  width: 660px; min-height: 680px; */
+        min-height: 400px;
+        padding: 8px;
+        border-radius: 2px;
+        box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+        margin: 0 0 3em;
+    }
+    
+    .deck .card {
+        height: 60px;
+        width: 60px;
+    }
+
+    .score-panel {
+        text-align: left;
+        width: 75%;
+        margin-bottom: 10px;
+    }
+
+    .deck .card.show {
+        font-size: 20px;
+    }
+    
+    .deck .card.match {
+        font-size: 20px;
+    }
+    
+    .deck .card.hide {
+        font-size: 20px;
+    }
+
+}
+
+@media screen and (min-width: 401px) and(max-width: 610px) {
+    .deck {
+        width: 90%;
+        min-height: 450px;
+        padding: 5%;
+        border-radius: 10px;
+        box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+        margin: 0 0 3em;
+    }
+
+    .deck .card {
+        height: 70px;
+        width: 70px;
+    }
+
+    .score-panel {
+        text-align: left;
+        width: 50%;
+        margin-bottom: 10px;
+    }
+
+}
+
+@media screen and (min-width: 611px) and (max-width: 760px) {
+  }
+
+@media screen and (min-width: 1200px) {
+  }
