@@ -52,15 +52,20 @@ restart.addEventListener('click', function(){
 let openCards = [];                 //A list of open cards
 
 function showCards(card) {
-    card.classList.add('show','open');
+    card.classList.add('show','open','animated','flipInY');
 }
 
 function matchCards(card) {
-    card.classList.add('match');
+    card.classList.remove('animated','flipInY')
+    card.classList.add('match','animated','bounceIn');
 }
 
 function hideCards(card) {
-    card.classList.remove('show','open');
+    card.classList.remove('show','open','animated','flipInY');
+    card.classList.add('hide','animated','tada');
+    setTimeout(function() {  
+        card.classList.remove('hide','animated','tada');
+   }, 700); 
 }
 
 let match = 0;
@@ -90,7 +95,7 @@ function tracker(){
                 hideCards(openCards[0]);
                 hideCards(openCards[1]);                       
                 openCards = [];          
-            }, 500);                       
+            }, 100);                       
         }
     }
     else {
