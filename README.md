@@ -33,6 +33,8 @@ Additional features of the game:
 
 You need to have access to the Internet and a browser installed (preferably Google Chrome) to run this game.
 
+To open the game: load **index.html** in Chrome.
+
 
 ## Languages used to build the game
 
