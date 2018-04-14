@@ -121,13 +121,48 @@ h1 {
  * Media queries for responsive look
  */
 
-@media screen and (max-width: 400px) {
+ @media screen and (max-width: 309px) {
     .deck {
-        width: 90%;             /*  width: 660px; min-height: 680px; */
-        min-height: 400px;
+        max-width: 270px;             /*  width: 660px; min-height: 680px; */
+        min-height: 340px;
+        padding: 7px;
+        border-radius: 2px;
+        box-shadow: 6px 8px 10px 0 rgba(46, 61, 73, 0.5);
+        margin: 0 0 2em;
+    }
+    
+    .deck .card {
+        height: 50px;
+        width: 50px;
+    }
+
+    .score-panel {
+        text-align: left;
+        width: 75%;
+        margin-bottom: 10px;
+        font-size: 12px;
+    }
+
+    .deck .card.show {
+        font-size: 18px;
+    }
+    
+    .deck .card.match {
+        font-size: 18px;
+    }
+    
+    .deck .card.hide {
+        font-size: 18px;
+    }
+}
+
+@media screen and (min-width: 310px) and (max-width: 400px) {
+    .deck {
+        max-width: 300px;             /*  width: 660px; min-height: 680px; */
+        min-height: 360px;
         padding: 8px;
         border-radius: 2px;
-        box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+        box-shadow: 10px 13px 18px 0 rgba(46, 61, 73, 0.5);
         margin: 0 0 3em;
     }
     
@@ -140,6 +175,7 @@ h1 {
         text-align: left;
         width: 75%;
         margin-bottom: 10px;
+        font-size: 14px;
     }
 
     .deck .card.show {
@@ -153,34 +189,26 @@ h1 {
     .deck .card.hide {
         font-size: 20px;
     }
-
 }
 
-@media screen and (min-width: 401px) and(max-width: 610px) {
+@media screen and (min-width: 401px) and (max-width: 665px) {
     .deck {
-        width: 90%;
+        width: 390px;
         min-height: 450px;
-        padding: 5%;
-        border-radius: 10px;
-        box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+        padding: 15px;
+        border-radius: 7px;
+        box-shadow: 10px 13px 17px 0 rgba(46, 61, 73, 0.5);
         margin: 0 0 3em;
     }
 
     .deck .card {
-        height: 70px;
-        width: 70px;
+        height: 80px;
+        width: 80px;
     }
 
     .score-panel {
         text-align: left;
-        width: 50%;
+        width: 200px;
         margin-bottom: 10px;
     }
-
 }
-
-@media screen and (min-width: 611px) and (max-width: 760px) {
-  }
-
-@media screen and (min-width: 1200px) {
-  }
