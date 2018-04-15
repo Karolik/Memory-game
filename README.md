@@ -15,7 +15,7 @@ The game is all about concentration and memory training. Players click cards to 
 ## Instructions
 
 There are 8 pairs of cards in the deck. Cards are randomly shuffled each time the browser window opens or when a player clicks the restart button. Initially cards are arranged with the symbol face down. Players click a card to flip it and see the sign. Up to two cards are visible at the same time. Players must memorise the position of the cards in order to match both cards with the same symbol.
-
+ 
 Each turn:
 •	The player flips one card over to reveal its underlying symbol.
 •	The player then turns over a second card, trying to find the corresponding card with the same symbol.
@@ -32,8 +32,6 @@ Additional features of the game:
 ### Prerequisites
 
 You need to have access to the Internet and a browser installed (preferably Google Chrome) to run this game.
-
-To open the game: load **index.html** in Chrome.
 
 
 ## Languages used to build the game
@@ -60,3 +58,8 @@ This project is licensed under the General License
 * My mentor, Neil, for the guidance, support and motivation
 * https://www.w3schools.com/
 * https://developer.mozilla.org/
+Libraries used:
+* Animate (https://daneden.github.io/animate.css/)
+* Sweetalert (https://sweetalert.js.org/guides/)
+* Font Awesome (https://www.bootstrapcdn.com/fontawesome/)
+* Fonts Google (https://fonts.google.com/)
