@@ -68,10 +68,6 @@ function hideCards(card) {
    }, 700);
 }
 
-/*function blockCards(card) {
-    card.classList.add('doubleclick');
-}*/
-
 let match = 0;
 
 // Function to open, match and hide cards; is called when a card is clicked
