@@ -27,22 +27,22 @@ function shuffle(array) {
 
 //Function to start the game: display the cards on the page and shuffle them using the provided "shuffle" method above
 
-function initialize(){ 
+function initialize() {
     shuffle(cards);
 
     //Loop through each card and create its HTML; Add each card's HTML to the page (Store the HTML in a string)
     let cardGrid = "";
     for(const card of cards) {
-        cardGrid += '<li class="card"><i class="'+card+'"></i></li>'; 
+        cardGrid += '<li class="card"><i class="'+card+'"></i></li>';
     }
-    deck.insertAdjacentHTML('afterbegin', cardGrid); 
+    deck.insertAdjacentHTML('afterbegin', cardGrid);
 }
 
 window.onload = initialize();
 
 // The restart button
 
-restart.addEventListener('click', function(){   
+restart.addEventListener('click', function() {
     document.location.href="";
     }
 )
@@ -52,28 +52,32 @@ restart.addEventListener('click', function(){
 let openCards = [];                 //A list of open cards
 
 function showCards(card) {
-    card.classList.add('show','open','animated','flipInY');
+    card.classList.add('show','open','animated','flipInY','blockClick');
 }
 
 function matchCards(card) {
     card.classList.remove('animated','flipInY')
-    card.classList.add('match','animated','bounceIn');
+    card.classList.add('match','animated','bounceIn','blockClick');
 }
 
 function hideCards(card) {
-    card.classList.remove('show','open','animated','flipInY');
+    card.classList.remove('show','open','animated','flipInY','blockClick');
     card.classList.add('hide','animated','tada');
-    setTimeout(function() {  
+    setTimeout(function() {
         card.classList.remove('hide','animated','tada');
-   }, 700); 
+   }, 700);
 }
+
+/*function blockCards(card) {
+    card.classList.add('doubleclick');
+}*/
 
 let match = 0;
 
 // Function to open, match and hide cards; is called when a card is clicked
 
 function tracker(){
-    let clickedCard = event.target; 
+    let clickedCard = event.target;
     if (openCards.length > 0) {         //If the list already has another card, check to see if the two cards match
         showCards(clickedCard);
         openCards.push(clickedCard);    //Add the card to a *list* of "open" cards
@@ -84,23 +88,24 @@ function tracker(){
             openCards = [];              //Remove the cards from the openCards list
             console.log(matchCards);
             match++;                     // Add the match to the number of matches
-            setTimeout(function() {  
+            setTimeout(function() {
                 if (match === 8) {      // If all cards have matched, call the endGame function to finish the game
-                endGame();    
-                }  
-           }, 600);                    
-       }       
+                endGame();
+                }
+           }, 600);
+       }
         else {                               //If the cards do not match, hide the card's symbol and remove the cards from the openCards list
             setTimeout(function() {          //Delay the execution of functions by 0,5 second, so the cards are visible for a moment
                 hideCards(openCards[0]);
-                hideCards(openCards[1]);                       
-                openCards = [];          
-            }, 100);                       
+                hideCards(openCards[1]);
+                openCards = [];
+            }, 100);
         }
     }
     else {
         showCards(clickedCard);
         openCards.push(clickedCard);
+        //blockCards(clickedCard);
     }
 }
 
@@ -114,22 +119,18 @@ function countMoves(){
 
 //Star rating - Remove stars after a number of moves
 
-let star3 = document.getElementsByClassName("fa fa-star")[2];
-let star2 = document.getElementsByClassName("fa fa-star")[1];
-let star1 = document.getElementsByClassName("fa fa-star")[0];
+const star3 = document.getElementsByClassName("fa fa-star")[2];
+const star2 = document.getElementsByClassName("fa fa-star")[1];
+//const star1 = document.getElementsByClassName("fa fa-star")[0];
 
 function removeStars(){
     if (moves == 22){
         star3.classList.remove("fa-star");
         star3.classList.add("fa-star-o");
     }
-    else if (moves == 30){
+    else if (moves == 40){
         star2.classList.remove("fa-star");
         star2.classList.add("fa-star-o");
-    }
-    else if (moves == 40){
-        star1.classList.remove("fa-star");
-        star1.classList.add("fa-star-o");
     }
 }
 
@@ -138,14 +139,11 @@ function countStars(){
     if (moves< 22){
         starsNumber = 3;
     }
-    else if (moves >= 22 && moves < 30){
+    else if (moves >= 22 && moves < 40){
         starsNumber = 2;
     }
-    else if (moves >= 30 && moves < 40){
-        starsNumber = 1;
-    }
     else if (moves >= 40){
-        starsNumber = 0;
+        starsNumber = 1;
     }
 }
 
@@ -155,13 +153,13 @@ let timer;
 
 deck.addEventListener('click', function(event){
     if (event.target.nodeName === 'LI'){
-        tracker(event);                         
+        tracker(event);
         countMoves();
         removeStars();
         countStars();
-        event.target.ondblclick = function(){event.preventDefault();};      // avoid double click on the same card
     }
-    if (moves == 1){                            //Start the timer when a player clicks the first card
+    //TODO: Start the timer when a player clicks the first card
+    if (moves === 1){
         timer = setInterval(countTime, 1000);
     }
 });
@@ -169,22 +167,22 @@ deck.addEventListener('click', function(event){
 //Set a timer
 
 const hour = document.querySelector(".hour");
-const minute = document.querySelector(".minute");   
+const minute = document.querySelector(".minute");
 const second = document.querySelector(".second");
 let seconds = 0;
 
 function countTime() {
   seconds++;
-  let h = hour.innerHTML = dd(parseInt(seconds / 3600)); 
-  minute.innerHTML = dd(parseInt((seconds - h*3600) / 60));   // When counter reaches 3600 sec, the number is visible as hours (1 hour), not as minutes (60)//Math.floor((seconds - hour*3600)/60);
+  let h = hour.innerHTML = dd(parseInt(seconds / 3600));
+  minute.innerHTML = dd(parseInt((seconds - h*3600) / 60));   // When counter reaches 3600 sec, the number is visible as hours (1 hour), not as minutes (60)
   second.innerHTML = dd(seconds % 60);
 }
 
-function dd(num) {             //Double digit timer 00:00:00 (not 0:0:0)
+function dd(num) {//Double digit timer 00:00:00 (not 0:0:0)
   let numString = num + "";
   if (numString.length < 2) {
         return "0" + numString;
-  } 
+  }
   else {
         return numString;
   }
@@ -192,15 +190,17 @@ function dd(num) {             //Double digit timer 00:00:00 (not 0:0:0)
 
 //Function to end the game
 
-function endGame(){       
-    swal({                                   //Popup message at the end of the game
+function endGame(){
+    //TODO: Popup message at the end of the game
+    swal({
         title: "Congratulations! You won!",
         text: "With "+ moveCounter.innerText +" moves and "+ starsNumber +" stars!"+"\n"+"Your time is "+time.innerText+"!",
         icon: "success",
         button: "Play again!",
-        
-    }).then((result) => {                   
-         document.location.href="";          //When the button is clicked to Play again, the game is restarted
+    //TODO: When the button is clicked to Play again, the game is restarted   
+    }).then((result) => {
+         document.location.href="";
     })
-    clearInterval(timer);                    //Stop the timer
+    //TODO: Stop the timer
+    clearInterval(timer);
 }
