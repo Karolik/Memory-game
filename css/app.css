@@ -57,7 +57,7 @@ h1 {
     width: 125px;
     background: #2e3d49;
     font-size: 0;
-    color: #ffffff;
+    color: #fff;
     border-radius: 8px;
     cursor: pointer;
     display: flex;
@@ -88,6 +88,10 @@ h1 {
     background:linear-gradient( #bd333b,#e58083);
     cursor: default;
     font-size: 33px;
+}
+
+.deck .card.blockClick {
+    pointer-events: none;
 }
 
 /*
@@ -122,18 +126,21 @@ h1 {
  */
 
  @media screen and (max-width: 309px) {
+    h1 {
+        font-weight: 200;
+    }
     .deck {
-        max-width: 270px;             /*  width: 660px; min-height: 680px; */
+        max-width: 270px;      
         min-height: 340px;
-        padding: 7px;
+        padding: 6px;
         border-radius: 2px;
         box-shadow: 6px 8px 10px 0 rgba(46, 61, 73, 0.5);
         margin: 0 0 2em;
     }
     
     .deck .card {
-        height: 50px;
-        width: 50px;
+        max-height: 53px;
+        max-width: 53px;
     }
 
     .score-panel {
@@ -158,7 +165,7 @@ h1 {
 
 @media screen and (min-width: 310px) and (max-width: 400px) {
     .deck {
-        max-width: 300px;             /*  width: 660px; min-height: 680px; */
+        max-width: 300px;    
         min-height: 360px;
         padding: 8px;
         border-radius: 2px;
@@ -191,7 +198,7 @@ h1 {
     }
 }
 
-@media screen and (min-width: 401px) and (max-width: 665px) {
+@media screen and (min-width: 401px) and (max-width: 700px) {
     .deck {
         width: 390px;
         min-height: 450px;
@@ -210,5 +217,6 @@ h1 {
         text-align: left;
         width: 200px;
         margin-bottom: 10px;
+        font-size: 14px;
     }
 }
