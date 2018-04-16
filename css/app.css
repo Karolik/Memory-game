@@ -128,10 +128,12 @@ h1 {
  @media screen and (max-width: 309px) {
     h1 {
         font-weight: 200;
+        font-size: 1.3em;
     }
     .deck {
-        max-width: 270px;      
-        min-height: 340px;
+        width: 100%;
+        max-width: 240px;      
+        min-height: 300px;
         padding: 6px;
         border-radius: 2px;
         box-shadow: 6px 8px 10px 0 rgba(46, 61, 73, 0.5);
@@ -139,15 +141,16 @@ h1 {
     }
     
     .deck .card {
-        max-height: 53px;
-        max-width: 53px;
+        max-height: 50px;
+        width: 22%;
+        max-width: 50px;
     }
 
     .score-panel {
         text-align: left;
-        width: 75%;
+        width: 80%;
         margin-bottom: 10px;
-        font-size: 12px;
+        font-size: 11px;
     }
 
     .deck .card.show {
