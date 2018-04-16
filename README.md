@@ -58,6 +58,7 @@ This project is licensed under the General License
 * My mentor, Neil, for the guidance, support and motivation
 * https://www.w3schools.com/
 * https://developer.mozilla.org/
+
 Libraries used:
 * Animate (https://daneden.github.io/animate.css/)
 * Sweetalert (https://sweetalert.js.org/guides/)
