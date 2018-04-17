@@ -10,6 +10,11 @@ const restart = document.querySelector('.restart');
 
 const cards = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-bolt", "fa fa-bolt", "fa fa-cube", "fa fa-cube", "fa fa-leaf", "fa fa-leaf", "fa fa-bicycle", "fa fa-bicycle", "fa fa-bomb", "fa fa-bomb", "fa fa-anchor", "fa fa-anchor" ];
 
+/* Or an alternative approach suggested by a reviewer:
+* const myArray = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb", "fa fa-anchor"];
+* const doubledArray = myArray.concat(myArray);
+*/
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -35,6 +40,10 @@ function initialize() {
     for(const card of cards) {
         cardGrid += '<li class="card"><i class="'+card+'"></i></li>';
     }
+    /* Or alternative: Rather than using strings to create items you can use the DOM methods directly:
+    * const card = document.createElement("li");
+    * card.classList.add("a-class", "a-second-class");
+    */
     deck.insertAdjacentHTML('afterbegin', cardGrid);
 }
 
@@ -65,7 +74,7 @@ function hideCards(card) {
     card.classList.add('hide','animated','tada');
     setTimeout(function() {
         card.classList.remove('hide','animated','tada');
-   }, 700);
+    }, 700);
 }
 
 let match = 0;
@@ -78,7 +87,7 @@ function tracker(){
         showCards(clickedCard);
         openCards.push(clickedCard);    //Add the card to a *list* of "open" cards
         console.log(openCards);
-       if(openCards[0].innerHTML === openCards[1].innerHTML){     //If the cards do match, lock the cards in the open position  
+        if(openCards[0].innerHTML === openCards[1].innerHTML){     //If the cards do match, lock the cards in the open position  
             matchCards(openCards[0]);
             matchCards(openCards[1]);
             openCards = [];              //Remove the cards from the openCards list
@@ -88,8 +97,8 @@ function tracker(){
                 if (match === 8) {      // If all cards have matched, call the endGame function to finish the game
                 endGame();
                 }
-           }, 600);
-       }
+            }, 600);
+        }
         else {                               //If the cards do not match, hide the card's symbol and remove the cards from the openCards list
             setTimeout(function() {          //Delay the execution of functions by 0,5 second, so the cards are visible for a moment
                 hideCards(openCards[0]);
@@ -101,14 +110,13 @@ function tracker(){
     else {
         showCards(clickedCard);
         openCards.push(clickedCard);
-        //blockCards(clickedCard);
     }
 }
 
 // Increment the move counter and display it on the page
 
 let moves = 0;
-function countMoves(){
+function countMoves() {
     moves++;
     moveCounter.innerHTML = parseInt(moves/2);          //Moves are counted each time a pair of cards gets open/matched(every second click)
 }
@@ -119,26 +127,26 @@ const star3 = document.getElementsByClassName("fa fa-star")[2];
 const star2 = document.getElementsByClassName("fa fa-star")[1];
 //const star1 = document.getElementsByClassName("fa fa-star")[0];
 
-function removeStars(){
+function removeStars() {
     if (moves == 22){
         star3.classList.remove("fa-star");
         star3.classList.add("fa-star-o");
     }
-    else if (moves == 40){
+    else if (moves == 40) {
         star2.classList.remove("fa-star");
         star2.classList.add("fa-star-o");
     }
 }
 
 let starsNumber ="";
-function countStars(){
+function countStars() {
     if (moves< 22){
         starsNumber = 3;
     }
-    else if (moves >= 22 && moves < 40){
+    else if (moves >= 22 && moves < 40) {
         starsNumber = 2;
     }
-    else if (moves >= 40){
+    else if (moves >= 40) {
         starsNumber = 1;
     }
 }
@@ -147,19 +155,37 @@ function countStars(){
 
 let timer;
 
-deck.addEventListener('click', function(event){
+deck.addEventListener('click', function(event) {
     if (event.target.nodeName === 'LI'){
         tracker(event);
         countMoves();
         removeStars();
         countStars();
-        timer = setInterval(countTime, 1000);
+        //timer = setInterval(countTime, 1000);
     }
     //TODO: Start the timer when a player clicks the first card
    /* if (moves === 1){
         timer = setInterval(countTime, 1000);
     }*/
 });
+
+function startTimer() {
+    // Remove the event listener from all the cards..
+    deck.forEach((card) => {
+        card.removeEventListener('click', startTimer);
+    });
+    timer = setInterval(countTime, 1000);
+}
+
+deck.forEach((card) => {
+    card.addEventListener('click', startTimer);
+});
+
+/*Add an event listener to each card in the deck. It should start the timer when the card is clicked: `card.addEventlistener("click", startTimer);
+Inside of the startTimer function, remove the event listener to prevent more timers from being started:
+// `deck` is an array with all the cards that are displayed.
+
+*/
 
 //Set a timer
 
@@ -169,20 +195,20 @@ const second = document.querySelector(".second");
 let seconds = 0;
 
 function countTime() {
-  seconds++;
-  let h = hour.innerHTML = dd(parseInt(seconds / 3600));
-  minute.innerHTML = dd(parseInt((seconds - h*3600) / 60));   // When counter reaches 3600 sec, the number is visible as hours (1 hour), not as minutes (60)
-  second.innerHTML = dd(seconds % 60);
+    seconds++;
+    let h = hour.innerHTML = dd(parseInt(seconds / 3600));
+    minute.innerHTML = dd(parseInt((seconds - h*3600) / 60));   // When counter reaches 3600 sec, the number is visible as hours (1 hour), not as minutes (60)
+    second.innerHTML = dd(seconds % 60);
 }
 
-function dd(num) {//Double digit timer 00:00:00 (not 0:0:0)
-  let numString = num + "";
-  if (numString.length < 2) {
+function dd(num) {  //Double digit timer 00:00:00 (not 0:0:0)
+    let numString = num + "";
+    if (numString.length < 2) {
         return "0" + numString;
-  }
-  else {
+    }
+    else {
         return numString;
-  }
+    }
 }
 
 //Function to end the game
@@ -196,7 +222,7 @@ function endGame(){
         button: "Play again!",
     //TODO: When the button is clicked to Play again, the game is restarted   
     }).then((result) => {
-         document.location.href="";
+        document.location.href="";
     })
     //TODO: Stop the timer
     clearInterval(timer);
