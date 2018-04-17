@@ -203,12 +203,13 @@ function countTime() {
 
 function dd(num) {  //Double digit timer 00:00:00 (not 0:0:0)
     let numString = num + "";
-    if (numString.length < 2) {
+    return numString.padStart(2, "0");
+   /* if (numString.length < 2) {
         return "0" + numString;
     }
     else {
         return numString;
-    }
+    }*/
 }
 
 //Function to end the game
