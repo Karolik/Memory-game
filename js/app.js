@@ -153,11 +153,12 @@ deck.addEventListener('click', function(event){
         countMoves();
         removeStars();
         countStars();
-    }
-    //TODO: Start the timer when a player clicks the first card
-    if (moves === 1){
         timer = setInterval(countTime, 1000);
     }
+    //TODO: Start the timer when a player clicks the first card
+   /* if (moves === 1){
+        timer = setInterval(countTime, 1000);
+    }*/
 });
 
 //Set a timer
