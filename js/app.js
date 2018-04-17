@@ -153,7 +153,7 @@ function countStars() {
 
 // Event listener - a card is clicked -display the card's symbol
 
-let timer;
+let timer = 0;
 
 deck.addEventListener('click', function(event) {
     if (event.target.nodeName === 'LI'){
@@ -161,31 +161,12 @@ deck.addEventListener('click', function(event) {
         countMoves();
         removeStars();
         countStars();
-        //timer = setInterval(countTime, 1000);
     }
     //TODO: Start the timer when a player clicks the first card
-   /* if (moves === 1){
+    if (timer===0){
         timer = setInterval(countTime, 1000);
-    }*/
+    }
 });
-
-function startTimer() {
-    // Remove the event listener from all the cards..
-    deck.forEach((card) => {
-        card.removeEventListener('click', startTimer);
-    });
-    timer = setInterval(countTime, 1000);
-}
-
-deck.forEach((card) => {
-    card.addEventListener('click', startTimer);
-});
-
-/*Add an event listener to each card in the deck. It should start the timer when the card is clicked: `card.addEventlistener("click", startTimer);
-Inside of the startTimer function, remove the event listener to prevent more timers from being started:
-// `deck` is an array with all the cards that are displayed.
-
-*/
 
 //Set a timer
 
