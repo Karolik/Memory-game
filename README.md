@@ -6,7 +6,7 @@ The game is all about concentration and memory training. Players click cards to 
 
 * [Instructions](#instructions)
 * [Prerequisites](#prerequisites)
-* [Languages used to build the game](#languages_used_to_build_the_game)
+* [Languages used to build the game](#languages-used-to-build-the-game)
 * [Contributing](#contributing)
 * [Authors](#authors)
 * [License](#license)
